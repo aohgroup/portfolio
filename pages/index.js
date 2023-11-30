@@ -1,33 +1,33 @@
-import NextLink from 'next/link'
+import { ChevronRightIcon } from '@chakra-ui/icons'
 import {
-  Link,
+  Box,
+  Button,
   Container,
   Heading,
-  Box,
-  SimpleGrid,
-  Button,
+  Link,
   List,
   ListItem,
-  useColorModeValue,
-  chakra
+  SimpleGrid,
+  chakra,
+  useColorModeValue
 } from '@chakra-ui/react'
-import { ChevronRightIcon, EmailIcon } from '@chakra-ui/icons'
-import Paragraph from '../components/paragraph'
-import { BioSection, BioYear } from '../components/bio'
-import Layout from '../components/layouts/article'
-import Section from '../components/section'
-import { GridItem } from '../components/grid-item'
+import Image from 'next/image'
+import NextLink from 'next/link'
 import {
   IoLogoFacebook,
-  IoMail,
-  IoLogoInstagram,
   IoLogoGithub,
-  IoLogoLinkedin
+  IoLogoInstagram,
+  IoLogoLinkedin,
+  IoMail
 } from 'react-icons/io5'
-import mfwThumb from '../public/images/stories/4.png'
-import hdbThumb from '../public/images/stories/12.png'
-import Image from 'next/image'
+import { BioSection, BioYear } from '../components/bio'
+import { GridItem } from '../components/grid-item'
+import Layout from '../components/layouts/article'
+import Paragraph from '../components/paragraph'
+import Section from '../components/section'
 import nustvondevImage from '../public/images/IMG_0004.JPG'
+import hdbThumb from '../public/images/stories/12.png'
+import mfwThumb from '../public/images/stories/4.png'
 const ProfileImage = chakra(Image, {
   shouldForwardProp: prop => ['width', 'height', 'src', 'alt'].includes(prop),
   baseStyle: { objectFit: 'cover' }

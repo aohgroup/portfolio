@@ -1,23 +1,22 @@
-import { forwardRef } from 'react'
-import Logo from './logo'
-import NextLink from 'next/link'
+import { HamburgerIcon } from '@chakra-ui/icons'
 import {
-  Container,
   Box,
-  Link,
-  Stack,
-  Heading,
+  Container,
   Flex,
+  Heading,
+  IconButton,
+  Link,
   Menu,
+  MenuButton,
   MenuItem,
   MenuList,
-  MenuButton,
-  IconButton,
+  Stack,
   useColorModeValue
 } from '@chakra-ui/react'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import NextLink from 'next/link'
+import { forwardRef } from 'react'
+import Logo from './logo'
 import ThemeToggleButton from './theme-toggle-button'
-import { IoLogoGithub } from 'react-icons/io5'
 
 const LinkItem = ({ href, path, target, children, ...props }) => {
   const active = path === href
