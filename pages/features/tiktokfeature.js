@@ -1,23 +1,25 @@
 import Layout from '@/components/layouts/article'
 import Section from '@/components/section'
-import NextLink from 'next/link'
 import {
-  AspectRatio,
   Box,
   Button,
+  Center,
   Container,
   Divider,
   Heading,
+  Image,
   Input,
   InputGroup,
   InputRightElement,
   LinkBox,
   Progress,
   Stack,
-  Text
+  Text,
+  useToast
 } from '@chakra-ui/react'
 import axios from 'axios'
-import React, { useState } from 'react'
+import NextLink from 'next/link'
+import { useState } from 'react'
 const init = {
   urlVideo: '',
   isLoading: false,
@@ -32,6 +34,7 @@ const init = {
 }
 const Tiktokfeature = () => {
   const [form, setForm] = useState(init)
+  const toast = useToast()
   const handleClick = async () => {
     if (!form.urlVideo) return
     setForm({ ...form, isLoading: true })
@@ -43,14 +46,11 @@ const Tiktokfeature = () => {
         url: form.urlVideo
       })
       const { data } = respone
-      // Sử dụng biểu thức chính quy để lấy đoạn chuỗi mong muốn
-      const match = data.medias[0].url.match(/url=(.*)/)
-
-      // Lấy giá trị từ group trong kết quả
-      const extractedString = match && match[1]
+      // const match = data.medias[0].url.match(/url=(.*)/)
+      // const extractedString = match && match[1]
 
       ;(form.title = data.title),
-        (form.urlView = extractedString || ''),
+        (form.urlView = data.thumbnail || ''),
         (form.urlDownloadFHD = data.medias[0].url || ''),
         (form.urlDownloadHD = data.medias[1].url || ''),
         (form.urlDownloadAudio = data.medias[2].url || ''),
@@ -58,8 +58,21 @@ const Tiktokfeature = () => {
       setForm({
         ...form
       })
+      toast({
+        title: 'Get video success',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      })
     } catch (error) {
       console.log(error)
+      setForm({ ...form, error: error.message })
+      toast({
+        title: form.error || '',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
     }
     setForm({ ...form, isLoading: false })
   }
@@ -139,13 +152,20 @@ const Tiktokfeature = () => {
                     )}
                   </Stack>
                   <Divider my={6} />
-                  <AspectRatio maxW="560px">
+                  {/* <AspectRatio maxW="560px">
                     <iframe
                       title={form.title}
                       src={form.urlView}
                       allowFullScreen
                     />
-                  </AspectRatio>
+                  </AspectRatio> */}
+                  <Center>
+                    <Image
+                      src={form.urlView}
+                      height={'350px'}
+                      alt={form.title}
+                    />
+                  </Center>
                 </LinkBox>
               )
             )}
